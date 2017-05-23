@@ -15,7 +15,7 @@ By default, the service uses port 6432 as this is the default port of pgbouncer.
 * /etc/pgbouncer/userlist.txt
 * /etc/default/pgbouncer
 
-### Setup Requirements 
+### Setup Requirements
 
 Requires a Debian or RedHat based system. If other OS's are needed, it shouldn't be hard to extend the module.
 
@@ -52,10 +52,19 @@ This array is written to /var/lib/postgresql/pgbouncer.auth
 
 Array entry format in hieradata:
 
+A users password can be provided as plaintext...
+
 ```
   pgbouncer::userlist:
     - user: 'admin'
       password: 'admin'
+```
+Or md5 hashes can be supplied
+
+```
+  pgbouncer::userlist:
+    - user: 'admin'
+      password_hash: 'md5imafakehash'
 ```
 
 ## Limitations

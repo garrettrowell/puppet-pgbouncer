@@ -1,6 +1,10 @@
 <% if @auth_list -%>
 <%  @auth_list.each do |entry| -%>
-<%  passhash = Digest::MD5.hexdigest( "#{entry['password']}#{entry['user']}" )-%>
-<%=   %Q|"#{entry['user']}" "md5#{passhash}"| %>
+<%    if entry['password_hash'] -%>
+<%=     %Q|"#{entry['user']}" "#{entry['password_hash']}"| %>
+<%    elsif entry['password'] -%>
+<%      passhash = Digest::MD5.hexdigest( "#{entry['password']}#{entry['user']}" )-%>
+<%=     %Q|"#{entry['user']}" "md5#{passhash}"| %>
+<%    end -%>
 <%  end -%>
-<% end %>
+<% end -%>
